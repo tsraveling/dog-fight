@@ -1,13 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dd5pg7d1rf4es"]
 
-[ext_resource type="Texture2D" uid="uid://wm4hnar64k06" path="res://assets/art/dev/orange-triangle.png" id="1_k6d50"]
+[ext_resource type="PackedScene" uid="uid://d4friu48rt3e3" path="res://prototypes/flight-model/ship/proto-ship.tscn" id="1_h5wyc"]
 
 [node name="ProtoFlightModel" type="Node2D"]
 
-[node name="Ship" type="CharacterBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship"]
-polygon = PackedVector2Array(1.5, -31, -32, 24, 33, 24)
-
-[node name="Sprite2D" type="Sprite2D" parent="Ship"]
-texture = ExtResource("1_k6d50")
+[node name="Ship" parent="." instance=ExtResource("1_h5wyc")]

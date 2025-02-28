@@ -8,11 +8,9 @@ import (
 	"github.com/tsraveling/dog-fight/server/internal/db"
 )
 
-// Captain represents the domain model for a captain.
 type Captain struct {
 	ID   string // Primary key
 	Name string
-	// Add additional fields as needed.
 }
 
 // CaptainRepository defines operations for managing Captain records.
@@ -42,9 +40,8 @@ func NewCaptainRepository(db *db.DB) (CaptainRepository, error) {
 	return &sqliteCaptainRepository{db: db}, nil
 }
 
-// Create always generates a new CUID and inserts a new captain record.
+// Iserts a new captain record.
 func (r *sqliteCaptainRepository) Create(captain Captain) (string, error) {
-	// Always generate a new CUID, ignoring any provided value.
 	captain.ID = cuid.New()
 	query := `INSERT INTO captains (id, name) VALUES (?, ?);`
 	_, err := r.db.Exec(query, captain.ID, captain.Name)
@@ -70,7 +67,10 @@ func (r *sqliteCaptainRepository) Get(id string) (*Captain, error) {
 
 // Update modifies an existing captain record.
 func (r *sqliteCaptainRepository) Update(captain Captain) error {
-	// Optionally, you can add validation here to check that captain.ID is a valid CUID.
+	if !isValidCUID(captain.ID) {
+		return errors.New("invalid captain ID: not a valid CUID")
+	}
+
 	query := `UPDATE captains SET name = ? WHERE id = ?;`
 	result, err := r.db.Exec(query, captain.Name, captain.ID)
 	if err != nil {
@@ -101,4 +101,8 @@ func (r *sqliteCaptainRepository) Delete(id string) error {
 		return errors.New("captain not found")
 	}
 	return nil
+}
+
+func isValidCUID(id string) bool {
+	return len(id) == 25 && id[0] == 'c'
 }

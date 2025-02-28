@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dd5pg7d1rf4es"]
+[gd_scene load_steps=4 format=3 uid="uid://dd5pg7d1rf4es"]
 
 [ext_resource type="PackedScene" uid="uid://d4friu48rt3e3" path="res://prototypes/flight-model/ship/proto-ship.tscn" id="1_h5wyc"]
+[ext_resource type="PackedScene" uid="uid://l43o75meywml" path="res://prototypes/flight-model/ship/proto-ship2.tscn" id="2_hibgq"]
+[ext_resource type="Script" path="res://prototypes/flight-model/ship/proto_ship_2.gd" id="3_b3st3"]
 
 [node name="ProtoFlightModel" type="Node2D"]
 
-[node name="Ship" parent="." instance=ExtResource("1_h5wyc")]
+[node name="CharacterShip" parent="." instance=ExtResource("1_h5wyc")]
+visible = false
+THRUST_FORCE = 6000.0
+ROTATION_SPEED = 7.0
+
+[node name="RigidShip" parent="." instance=ExtResource("2_hibgq")]
+script = ExtResource("3_b3st3")
+THRUST_FORCE = 10000.0

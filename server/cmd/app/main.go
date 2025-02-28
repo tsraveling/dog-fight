@@ -23,7 +23,7 @@ func main() {
 
 	// Example: Create a new captain.
 	newCaptain := repositories.Captain{
-        Name: "Captain Picard",
+    	Name: "Captain Picard",
     }
 	id, err := captainRepo.Create(newCaptain)
 	if err != nil {

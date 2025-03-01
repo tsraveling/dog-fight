@@ -5,12 +5,16 @@
 [ext_resource type="Script" path="res://prototypes/flight-model/ship/proto_ship_2.gd" id="3_b3st3"]
 
 [node name="ProtoFlightModel" type="Node2D"]
+position = Vector2(587, 291)
 
 [node name="CharacterShip" parent="." instance=ExtResource("1_h5wyc")]
-visible = false
+position = Vector2(45, 3)
 THRUST_FORCE = 6000.0
-ROTATION_SPEED = 7.0
 
 [node name="RigidShip" parent="." instance=ExtResource("2_hibgq")]
+modulate = Color(0.223529, 1, 0, 1)
+position = Vector2(-69, 2)
+gravity_scale = 0.0
+inertia = 1.0
 script = ExtResource("3_b3st3")
-THRUST_FORCE = 10000.0
+THRUST_FORCE = 6000.0

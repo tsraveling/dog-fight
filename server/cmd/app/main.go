@@ -27,7 +27,7 @@ type AuthRequest struct {
 var captainRepo repositories.CaptainRepository
 
 func main() {
-	// Initialize your database and repository.
+	// Initialize the database and repository.
 	sqliteDB, err := db.OpenDB("internal/db/data.db")
 	if err != nil {
 		log.Fatalf("Error opening DB: %v", err)

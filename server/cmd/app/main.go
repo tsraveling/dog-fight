@@ -84,7 +84,6 @@ func handleConnection(conn net.Conn) {
 			resp.Message = "Enlist successful. Captain ID: " + id
 		}
 	case "login":
-		// auth.Login now returns a *repositories.SafeCaptain.
 		captain, err := auth.Login(captainRepo, req.Username, req.Password)
 		if err != nil {
 			resp.Success = false

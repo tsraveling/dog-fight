@@ -15,6 +15,10 @@ run/main_scene="res://prototypes/flight-model/ProtoFlightModel.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://prototypes/flight-model/game_manager.gd"
+
 [input]
 
 move_up={

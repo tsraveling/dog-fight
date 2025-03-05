@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
 @export var THRUST_FORCE: float = 5000.0
 @export var ROTATION_SPEED: float = 5.0
 

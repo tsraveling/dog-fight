@@ -2,18 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://d4friu48rt3e3" path="res://prototypes/flight-model/ship/proto-ship.tscn" id="1_h5wyc"]
 [ext_resource type="PackedScene" uid="uid://l43o75meywml" path="res://prototypes/flight-model/ship/proto-ship2.tscn" id="2_hibgq"]
-[ext_resource type="Script" path="res://prototypes/flight-model/ship/proto_ship_2.gd" id="3_b3st3"]
+[ext_resource type="Script" uid="uid://d1me642gl6g8f" path="res://prototypes/flight-model/ship/proto_ship_2.gd" id="3_b3st3"]
 [ext_resource type="Texture2D" uid="uid://dl0bxvdrpmd0q" path="res://assets/art/dev/ship.png" id="4_8kdtw"]
 [ext_resource type="PackedScene" uid="uid://durquigb4jng4" path="res://prototypes/flight-model/barrel/barrel.tscn" id="5_ihrxn"]
-[ext_resource type="Script" path="res://prototypes/flight-model/barrel/barrel.gd" id="6_y8rtx"]
-[ext_resource type="Script" path="res://prototypes/flight-model/barrel/barrel_manager.gd" id="8_ta1cy"]
+[ext_resource type="Script" uid="uid://ds0bhgt7ihuxn" path="res://prototypes/flight-model/barrel/barrel.gd" id="6_y8rtx"]
+[ext_resource type="Script" uid="uid://8sawogq215ll" path="res://prototypes/flight-model/barrel/barrel_manager.gd" id="8_ta1cy"]
 
 [node name="ProtoFlightModel" type="Node2D"]
-position = Vector2(587, 291)
 
 [node name="CharacterShip" parent="." instance=ExtResource("1_h5wyc")]
 modulate = Color(1, 0.721569, 0.278431, 1)
-position = Vector2(45, 3)
+position = Vector2(666, 299)
 THRUST_FORCE = 6000.0
 
 [node name="CollisionPolygon2D" parent="CharacterShip" index="0"]
@@ -25,7 +24,7 @@ texture = ExtResource("4_8kdtw")
 
 [node name="RigidShip" parent="." instance=ExtResource("2_hibgq")]
 modulate = Color(0.223529, 1, 0, 1)
-position = Vector2(-69, 2)
+position = Vector2(490, 300)
 gravity_scale = 0.0
 inertia = 1.0
 script = ExtResource("3_b3st3")
@@ -44,6 +43,7 @@ gravity_scale = 0.0
 script = ExtResource("6_y8rtx")
 
 [node name="BarrelManager" type="Node2D" parent="."]
+position = Vector2(577, 326)
 script = ExtResource("8_ta1cy")
 barrel_scene = ExtResource("5_ihrxn")
 

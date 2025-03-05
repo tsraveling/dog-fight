@@ -15,5 +15,3 @@ func _physics_process(delta: float) -> void:
 		apply_torque(-TORQUE_FORCE * delta)  # Rotate left
 	if Input.is_action_pressed("move_right"):
 		apply_torque(TORQUE_FORCE * delta)  # Rotate right
-
-

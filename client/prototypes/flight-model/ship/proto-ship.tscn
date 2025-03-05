@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d4friu48rt3e3"]
 
-[ext_resource type="Script" path="res://prototypes/flight-model/ship/proto_ship.gd" id="1_fqgkj"]
+[ext_resource type="Script" uid="uid://bbm68mwi60ahb" path="res://prototypes/flight-model/ship/proto_ship.gd" id="1_fqgkj"]
 [ext_resource type="Texture2D" uid="uid://wm4hnar64k06" path="res://assets/art/dev/orange-triangle.png" id="1_ma626"]
 
 [node name="Ship" type="CharacterBody2D"]

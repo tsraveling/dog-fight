@@ -2,19 +2,20 @@ package auth
 
 import (
 	"errors"
+	"strconv"
 	"strings"
 	"unicode"
 
 	"github.com/alexedwards/argon2id"
-	"github.com/tsraveling/dog-fight/server/internal/repositories"
+	"github.com/tsraveling/dog-fight/server/common/pkg/models/player"
 )
 
 const (
-	DefaultStartingMoney 	= 1000
-	DefaultRank          	= "Zeo I"
-	MinUsernameLength		= 3
-	MaxUsernameLength		= 32
-	MinPasswordLength		= 8
+	DefaultStartingMoney = 1000
+	DefaultRank          = "Zeo I"
+	MinUsernameLength    = 3
+	MaxUsernameLength    = 32
+	MinPasswordLength    = 8
 )
 
 // validateCredentials validates the username and password.
@@ -46,8 +47,8 @@ func validateCredentials(username, password string) error {
 	return nil
 }
 
-// Enlist creates a new captain account on this server.
-func Enlist(repo repositories.CaptainRepository, username, password string) (string, error) {
+// Enlist creates a new player account on this server.
+func Enlist(repo player.PlayerRepository, username, password string) (string, error) {
 	// Step 1: Validate credentials.
 	if err := validateCredentials(username, password); err != nil {
 		return "", err
@@ -68,47 +69,47 @@ func Enlist(repo repositories.CaptainRepository, username, password string) (str
 		return "", errors.New("failed to hash password")
 	}
 
-	// Step 4: Create a new captain record with default rank and starting money.
-	captain := repositories.Captain {
-		Username: username,
+	// Step 4: Create a new player record with default rank and starting money.
+	newPlayer := player.Player{
+		Username:     username,
 		PasswordHash: hash,
-		Rank: DefaultRank,
-		Money: DefaultStartingMoney,
+		Rank:         DefaultRank,
+		Money:        DefaultStartingMoney,
 	}
 
-	// Step 5: Insert the new captain record into the repository.
-	id, err := repo.Create(captain)
+	// Step 5: Insert the new player record into the repository.
+	id, err := repo.Create(newPlayer)
 	if err != nil {
-		return "", errors.New("failed to create captain record")
+		return "", errors.New("failed to create player record")
 	}
 	return id, nil
 }
 
-// Login authenticates a captain using the provided username and password.
-func Login(repo repositories.CaptainRepository, username, password string) (*repositories.SafeCaptain, error) {
+// Login authenticates a player using the provided username and password.
+func Login(repo player.PlayerRepository, username, password string) (*player.SafePlayer, error) {
 	// Step 1: Normalize the username.
 	username = strings.ToLower(strings.TrimSpace(username))
 
-	// Step 2: Retrieve the captain record.
-	captain, err := repo.GetByUsername(username)
+	// Step 2: Retrieve the player record.
+	p, err := repo.GetByUsername(username)
 	if err != nil {
 		return nil, errors.New("invalid credentials")
 	}
 
 	// Step 3: Compare the provided password with the stored hash.
-	match, err := argon2id.ComparePasswordAndHash(password, captain.PasswordHash)
+	match, err := argon2id.ComparePasswordAndHash(password, p.PasswordHash)
 	if err != nil || !match {
 		return nil, errors.New("invalid credentials")
 	}
-	
-	// Step 4: Build a safe copy of the captain
-	safeCaptain := &repositories.SafeCaptain {
-		ID: captain.ID,
-		Username: captain.Username,
-		Rank: captain.Rank,
-		Money: captain.Money,
+
+	// Step 4: Build a safe copy of the player.
+	safePlayer := &player.SafePlayer{
+		ID:       p.ID,
+		Username: p.Username,
+		Rank:     p.Rank,
+		Money:    strconv.Itoa(p.Money),
 	}
 
-	// Step 5: Return the sanitized captain record.
-	return safeCaptain, nil
+	// Step 5: Return the sanitized player record.
+	return safePlayer, nil
 }

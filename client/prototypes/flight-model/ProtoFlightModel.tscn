@@ -11,6 +11,7 @@
 [node name="ProtoFlightModel" type="Node2D"]
 
 [node name="CharacterShip" parent="." instance=ExtResource("1_h5wyc")]
+visible = false
 modulate = Color(1, 0.721569, 0.278431, 1)
 position = Vector2(666, 299)
 THRUST_FORCE = 6000.0

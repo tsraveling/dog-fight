@@ -4,6 +4,7 @@ extends Node2D
 @export var spawn_count: int = 10
 @export var spawn_diameter: float = 2000
 
+
 func _ready() -> void:
 	
 	var spawn_area = Vector2(spawn_diameter, spawn_diameter)
@@ -27,4 +28,6 @@ func _ready() -> void:
 		instance.position = global_position + random_position # Set the position of the instance
 		instance.rotation_degrees = random_rotation # Random starting rotation
 		instance.apply_impulse(random_impulse, Vector2.ZERO) # Applies the impulse to the instance
+		instance.linear_damp_mode = RigidBody2D.DAMP_MODE_REPLACE
+		instance.linear_damp = 0.0
 		add_child(instance)

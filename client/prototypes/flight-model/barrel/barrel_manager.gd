@@ -2,11 +2,12 @@ extends Node2D
 
 @export var barrel_scene: PackedScene
 @export var spawn_count: int = 10
-
-# Stores the width (screen_size.x) and height (screen_size.y) of the game window
-var spawn_area: Vector2 = Vector2(1920, 1080)
+@export var spawn_diameter: float = 2000
 
 func _ready() -> void:
+	
+	var spawn_area = Vector2(spawn_diameter, spawn_diameter)
+
 	if not barrel_scene:
 		print("Assign barrel.tscn to the Barrel Scene in the Inspector.")
 		return
@@ -24,9 +25,6 @@ func _ready() -> void:
 		)
 
 		instance.position = global_position + random_position # Set the position of the instance
-		instance.gravity_scale = 0 # Turns off gravity
-		instance.linear_damp = 0 # Not working yet
-		instance.angular_damp = 0 # Not working yet
 		instance.rotation_degrees = random_rotation # Random starting rotation
 		instance.apply_impulse(random_impulse, Vector2.ZERO) # Applies the impulse to the instance
 		add_child(instance)

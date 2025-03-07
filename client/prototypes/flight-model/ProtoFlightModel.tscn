@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dd5pg7d1rf4es"]
+[gd_scene load_steps=4 format=3 uid="uid://dd5pg7d1rf4es"]
 
 [ext_resource type="PackedScene" uid="uid://corp8hv0y042k" path="res://prototypes/flight-model/ship/ProtoShip.tscn" id="1_felnc"]
 [ext_resource type="PackedScene" uid="uid://durquigb4jng4" path="res://prototypes/flight-model/barrel/barrel.tscn" id="5_ihrxn"]
-[ext_resource type="Script" uid="uid://ds0bhgt7ihuxn" path="res://prototypes/flight-model/barrel/barrel.gd" id="6_y8rtx"]
 [ext_resource type="Script" uid="uid://8sawogq215ll" path="res://prototypes/flight-model/barrel/barrel_manager.gd" id="8_ta1cy"]
 
 [node name="ProtoFlightModel" type="Node2D"]
@@ -12,14 +11,8 @@ position = Vector2(490, 300)
 
 [node name="Camera2D" type="Camera2D" parent="ProtoShip"]
 
-[node name="Barrel" parent="." instance=ExtResource("5_ihrxn")]
-position = Vector2(-649, -352)
-gravity_scale = 0.0
-script = ExtResource("6_y8rtx")
-
 [node name="BarrelManager" type="Node2D" parent="."]
 position = Vector2(577, 326)
 script = ExtResource("8_ta1cy")
 barrel_scene = ExtResource("5_ihrxn")
 spawn_count = 100
-spawn_diameter = 5000.0

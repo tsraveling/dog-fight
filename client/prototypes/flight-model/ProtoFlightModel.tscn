@@ -1,13 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://dd5pg7d1rf4es"]
+[gd_scene load_steps=7 format=3 uid="uid://dd5pg7d1rf4es"]
 
-[ext_resource type="PackedScene" uid="uid://corp8hv0y042k" path="res://prototypes/flight-model/ship/ProtoShip.tscn" id="1_felnc"]
+[ext_resource type="PackedScene" path="res://prototypes/flight-model/ship/ProtoShip.tscn" id="1_felnc"]
+[ext_resource type="Texture2D" uid="uid://db1gflmqlo38l" path="res://assets/art/dev/stars_far_solid.png" id="4_85apk"]
+[ext_resource type="Texture2D" uid="uid://dfepjcnjflqlf" path="res://assets/art/dev/stars_mid.png" id="5_4ia8u"]
 [ext_resource type="PackedScene" uid="uid://durquigb4jng4" path="res://prototypes/flight-model/barrel/barrel.tscn" id="5_ihrxn"]
+[ext_resource type="Texture2D" uid="uid://co87v43xo0cay" path="res://assets/art/dev/stars_near.png" id="6_hcnwc"]
 [ext_resource type="Script" uid="uid://8sawogq215ll" path="res://prototypes/flight-model/barrel/barrel_manager.gd" id="8_ta1cy"]
 
 [node name="ProtoFlightModel" type="Node2D"]
 
+[node name="Parallax2DFar" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2DFar"]
+texture = ExtResource("4_85apk")
+centered = false
+
+[node name="Parallax2DMid" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.115, 0.115)
+repeat_size = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2DMid"]
+texture = ExtResource("5_4ia8u")
+centered = false
+
+[node name="Parallax2DNear" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.13, 0.13)
+repeat_size = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2DNear"]
+texture = ExtResource("6_hcnwc")
+centered = false
+
 [node name="ProtoShip" parent="." instance=ExtResource("1_felnc")]
-position = Vector2(490, 300)
+position = Vector2(960, 540)
 
 [node name="Camera2D" type="Camera2D" parent="ProtoShip"]
 

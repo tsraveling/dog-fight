@@ -1,8 +1,12 @@
 extends Area2D
+class_name BaseProjectile
 
+# Weapon properties
 @export var speed: float = 500.0
 @export var damage: float = 10.0
 @export var lifetime: float = 2.0  # How long the projectile lives before being destroyed
+@export var fire_cooldown: float = 0.2  # Time between shots in seconds
+@export var projectile_name: String = "Basic Projectile"
 
 var direction: Vector2 = Vector2.RIGHT  # Default direction, will be set when fired
 

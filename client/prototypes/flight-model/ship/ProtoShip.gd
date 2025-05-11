@@ -1,9 +1,10 @@
 extends RigidBody2D
 
+const BaseProjectile = preload("res://prototypes/flight-model/ship/projectiles/Projectile.gd")
+
 @export var thrust_force: float = 5000.0
 @export var rotation_speed: float = 5.0
 @export var torque_force: float = 500.0 # Rotational force
-@export var fire_cooldown: float = 0.01  # Time between shots in seconds - set to 0.01 to allow continuous firing
 
 @onready var thrust_polygon := $ThrustPolygon
 @onready var projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/Projectile.tscn")
@@ -39,6 +40,7 @@ func _physics_process(delta: float) -> void:
 		fire_projectile()
 
 func fire_projectile() -> void:
+	# Create a new projectile instance
 	var projectile = projectile_scene.instantiate()
 	get_tree().root.add_child(projectile)
 	
@@ -46,7 +48,7 @@ func fire_projectile() -> void:
 	var spawn_offset = Vector2(0, -30).rotated(rotation)
 	projectile.initialize(global_position + spawn_offset, Vector2(0, -1).rotated(rotation))
 	
-	# Start cooldown
+	# Start cooldown using the projectile's cooldown value
 	can_fire = false
-	await get_tree().create_timer(fire_cooldown).timeout
+	await get_tree().create_timer(projectile.fire_cooldown).timeout
 	can_fire = true

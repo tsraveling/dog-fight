@@ -1,13 +1,11 @@
 extends RigidBody2D
 
-const BaseProjectile = preload("res://prototypes/flight-model/ship/projectiles/Projectile.gd")
-
 @export var thrust_force: float = 5000.0
 @export var rotation_speed: float = 5.0
 @export var torque_force: float = 500.0 # Rotational force
 
 @onready var thrust_polygon := $ThrustPolygon
-@onready var projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/Projectile.tscn")
+@onready var projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/LaserProjectile.tscn")
 
 var forward_thrust: Vector2 = Vector2.ZERO
 var can_fire: bool = true

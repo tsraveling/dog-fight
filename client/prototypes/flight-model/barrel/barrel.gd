@@ -14,7 +14,6 @@ func _ready() -> void:
 
 	current_health = max_health
 	anim.animation_finished.connect(_on_animation_finished) # Attach signal for end of animation
-	body_entered.connect(_on_body_entered)  # Enable collision detection
 	add_to_group("barrels")  # Add to barrels group for projectile detection
 
 func _on_body_entered(body):

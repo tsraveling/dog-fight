@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dd5pg7d1rf4es"]
 
-[ext_resource type="PackedScene" path="res://prototypes/flight-model/ship/ProtoShip.tscn" id="1_felnc"]
+[ext_resource type="PackedScene" uid="uid://corp8hv0y042k" path="res://prototypes/flight-model/ship/ProtoShip.tscn" id="1_felnc"]
 [ext_resource type="Texture2D" uid="uid://db1gflmqlo38l" path="res://assets/art/dev/stars_far_solid.png" id="4_85apk"]
 [ext_resource type="Texture2D" uid="uid://dfepjcnjflqlf" path="res://assets/art/dev/stars_mid.png" id="5_4ia8u"]
 [ext_resource type="PackedScene" uid="uid://durquigb4jng4" path="res://prototypes/flight-model/barrel/barrel.tscn" id="5_ihrxn"]

@@ -5,16 +5,20 @@ extends RigidBody2D
 @export var torque_force: float = 500.0 # Rotational force
 
 @onready var thrust_polygon := $ThrustPolygon
-@onready var projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/LaserProjectile.tscn")
+@onready var basic_projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/BasicProjectile.tscn")
+@onready var laser_projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/LaserProjectile.tscn")
 
 var forward_thrust: Vector2 = Vector2.ZERO
 var can_fire: bool = true
+var current_projectile_scene: PackedScene
 
 func _ready() -> void:
 	linear_damp_mode = RigidBody2D.DAMP_MODE_REPLACE
 	linear_damp = 0.0
 	angular_damp_mode = RigidBody2D.DAMP_MODE_REPLACE
 	angular_damp = 0.0
+	# Set default projectile to basic
+	current_projectile_scene = basic_projectile_scene
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("move_up"):
@@ -36,10 +40,16 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_pressed("shoot") and can_fire:
 		fire_projectile()
+		
+	# Handle projectile switching
+	if Input.is_action_just_pressed("1"):
+		current_projectile_scene = basic_projectile_scene
+	if Input.is_action_just_pressed("2"):
+		current_projectile_scene = laser_projectile_scene
 
 func fire_projectile() -> void:
 	# Create a new projectile instance
-	var projectile = projectile_scene.instantiate()
+	var projectile = current_projectile_scene.instantiate()
 	get_tree().root.add_child(projectile)
 	
 	# Calculate spawn position slightly in front of the ship

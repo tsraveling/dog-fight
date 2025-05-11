@@ -3,9 +3,9 @@ extends Projectile
 func _ready():
 	# Override properties for laser
 	speed = 800.0  # Faster than basic projectile
-	damage = 5.0  # More damage
-	lifetime = 1.0  # Shorter lifetime
-	fire_cooldown = 0.1  # Slightly longer cooldown
+	damage = 50.0  # More damage
+	lifetime = 10.0  # Longer lifetime
+	fire_cooldown = 0.8  # Slightly longer cooldown
 	projectile_name = "Laser"
 	super._ready()
 	

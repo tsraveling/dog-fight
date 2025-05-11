@@ -3,7 +3,7 @@ extends RigidBody2D
 @export var thrust_force: float = 5000.0
 @export var rotation_speed: float = 5.0
 @export var torque_force: float = 500.0 # Rotational force
-@export var fire_cooldown: float = 0.01  # Time between shots in seconds
+@export var fire_cooldown: float = 0.01  # Time between shots in seconds - set to 0.01 to allow continuous firing
 
 @onready var thrust_polygon := $ThrustPolygon
 @onready var projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/Projectile.tscn")

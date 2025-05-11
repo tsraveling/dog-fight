@@ -3,10 +3,13 @@ extends RigidBody2D
 @export var thrust_force: float = 5000.0
 @export var rotation_speed: float = 5.0
 @export var torque_force: float = 500.0 # Rotational force
+@export var fire_cooldown: float = 0.01  # Time between shots in seconds
 
 @onready var thrust_polygon := $ThrustPolygon
+@onready var projectile_scene := preload("res://prototypes/flight-model/ship/projectiles/Projectile.tscn")
 
 var forward_thrust: Vector2 = Vector2.ZERO
+var can_fire: bool = true
 
 func _ready() -> void:
 	linear_damp_mode = RigidBody2D.DAMP_MODE_REPLACE
@@ -31,3 +34,19 @@ func _physics_process(delta: float) -> void:
 		apply_torque(-torque_force * delta)  # Rotate left
 	if Input.is_action_pressed("move_right"):
 		apply_torque(torque_force * delta)  # Rotate right
+		
+	if Input.is_action_pressed("shoot") and can_fire:
+		fire_projectile()
+
+func fire_projectile() -> void:
+	var projectile = projectile_scene.instantiate()
+	get_tree().root.add_child(projectile)
+	
+	# Calculate spawn position slightly in front of the ship
+	var spawn_offset = Vector2(0, -30).rotated(rotation)
+	projectile.initialize(global_position + spawn_offset, Vector2(0, -1).rotated(rotation))
+	
+	# Start cooldown
+	can_fire = false
+	await get_tree().create_timer(fire_cooldown).timeout
+	can_fire = true
